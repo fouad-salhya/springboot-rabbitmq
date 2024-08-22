@@ -1,16 +1,19 @@
-package com.reclamation.dtos;
+package com.reclamation.responses;
 
 import com.reclamation.entities.ReclamationStatus;
 import com.reclamation.entities.TypeReclamation;
 
-public class ReclamationDto {
+public class ReclamationResponse {
 
 	private String reclamationId;
+	
 	private TypeReclamation typeReclamation;
+	
 	private String description;
+	
 	private ReclamationStatus status;
 	
-
+	
 	public String getReclamationId() {
 		return reclamationId;
 	}
@@ -36,7 +39,4 @@ public class ReclamationDto {
 		this.status = status;
 	}
 	
-
-
-
 }

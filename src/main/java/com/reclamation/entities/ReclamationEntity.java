@@ -21,32 +21,23 @@ public class ReclamationEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "reclamation_id")
-	private String reclmationId;
-
+	@Column
+	private String reclamationId;
+/*
 	@Column(name = "user_id", nullable = false)
 	private String userId;
+	*/
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type_reclamation", nullable = false)
+	@Column(nullable = false)
 	private TypeReclamation typeReclamation;
 
 	@Column(nullable = false)
 	private String description;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "reclamation_status", nullable = false)
+	@Column(nullable = false)
 	private ReclamationStatus status;
-
-	
-	
-	public String getReclmationId() {
-		return reclmationId;
-	}
-
-	public void setReclmationId(String reclmationId) {
-		this.reclmationId = reclmationId;
-	}
 
 	public Long getId() {
 		return id;
@@ -56,12 +47,13 @@ public class ReclamationEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+
+	public String getReclamationId() {
+		return reclamationId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setReclamationId(String reclamationId) {
+		this.reclamationId = reclamationId;
 	}
 
 	public TypeReclamation getTypeReclamation() {
