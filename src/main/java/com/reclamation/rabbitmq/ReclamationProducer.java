@@ -1,12 +1,12 @@
 package com.reclamation.rabbitmq;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 
-@Service
+@Component
 public class ReclamationProducer {
 	
 	private final AmqpTemplate amqpTemplate;	
@@ -18,9 +18,9 @@ public class ReclamationProducer {
     }
 
 
-    public void sendToReclamationQueue(String message) {
-        amqpTemplate.convertAndSend(reclQueue.getName(), message);
-        System.out.println("Message sent to reclamationQueue: " + message);
+    public void sendToReclamationQueue(String reclamationId) {
+        amqpTemplate.convertAndSend(reclQueue.getName(), reclamationId);
+        System.out.println("reclamationId sent to nodejs reclamationQueue: " + reclamationId);
     }
 
 }

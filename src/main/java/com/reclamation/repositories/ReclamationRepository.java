@@ -8,4 +8,5 @@ import com.reclamation.entities.ReclamationEntity;
 @Repository
 public interface ReclamationRepository extends JpaRepository<ReclamationEntity, Long> {
 
+	ReclamationEntity findByReclamationId(String userId);
 }

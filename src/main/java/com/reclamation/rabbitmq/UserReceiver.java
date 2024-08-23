@@ -1,26 +1,23 @@
 package com.reclamation.rabbitmq;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
+import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserReceiver {
 	
-
-    private CompletableFuture<String> userIdFuture = new CompletableFuture<>();
-	
+    private final AtomicReference<String> userIdReference = new AtomicReference<>();	
 	
     @RabbitListener(queues = RabbitMQConfig.USER_QUEUE)
     public void receiveUserId(String userId) {
-        System.out.println("Message received from " + RabbitMQConfig.USER_QUEUE + ": " + userId  );
-        userIdFuture.complete(userId);
+        System.out.println("j ai recoit le userId " + RabbitMQConfig.USER_QUEUE + ": " + userId  );
+        userIdReference.set(userId);
     }
     
-    public String getUserId() throws InterruptedException, ExecutionException {
-        return userIdFuture.get();  // Bloque jusqu'à ce que le userId soit disponible
+    public String getUserId() {
+        return userIdReference.get();
     }
 
 	

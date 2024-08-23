@@ -34,7 +34,7 @@ public class ReclamationService {
 	@Autowired
 	UserReceiver userReceiver;
 	
-	
+		
 	
 	public ReclamationDto create(ReclamationDto reclamationDto) throws InterruptedException, ExecutionException {
 		
@@ -47,10 +47,14 @@ public class ReclamationService {
 		reclamationEntity.setStatus(ReclamationStatus.PENDING);	
 		
 		String userId = userReceiver.getUserId();
+		
         reclamationEntity.setUserId(userId);
+        
 		ReclamationEntity reclamation = reclmationRepository.save(reclamationEntity);
 		
 		ReclamationDto newDto = modelMapper.map(reclamation, ReclamationDto.class);
+		
+		reclamationProducer.sendToReclamationQueue(newDto.getReclamationId());
 		
 		return newDto;
 		
@@ -78,6 +82,14 @@ public class ReclamationService {
 		}
 		
 		return reclamationsDto;
+		
+	}
+	
+	public void removeReclamation(String userId) {
+		
+		ReclamationEntity reclamation = reclmationRepository.findByReclamationId(userId);
+		
+		 reclmationRepository.delete(reclamation);
 		
 	}
 	
