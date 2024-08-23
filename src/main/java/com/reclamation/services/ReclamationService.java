@@ -2,6 +2,7 @@ package com.reclamation.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.reclamation.dtos.ReclamationDto;
 import com.reclamation.entities.ReclamationEntity;
 import com.reclamation.entities.ReclamationStatus;
+import com.reclamation.rabbitmq.ReclamationProducer;
+import com.reclamation.rabbitmq.UserReceiver;
 import com.reclamation.repositories.ReclamationRepository;
 import com.reclamation.shared.Utils;
 
@@ -33,17 +36,18 @@ public class ReclamationService {
 	
 	
 	
-	
-	public ReclamationDto create(ReclamationDto reclmationDto) {
+	public ReclamationDto create(ReclamationDto reclamationDto) throws InterruptedException, ExecutionException {
 		
 		ModelMapper modelMapper = new ModelMapper();
 		
-		ReclamationEntity reclamationEntity = modelMapper.map(reclmationDto, ReclamationEntity.class);
+		ReclamationEntity reclamationEntity = modelMapper.map(reclamationDto, ReclamationEntity.class);
 		
 		reclamationEntity.setReclamationId(utils.generateStringId(32));
 		
 		reclamationEntity.setStatus(ReclamationStatus.PENDING);	
-				
+		
+		String userId = userReceiver.getUserId();
+        reclamationEntity.setUserId(userId);
 		ReclamationEntity reclamation = reclmationRepository.save(reclamationEntity);
 		
 		ReclamationDto newDto = modelMapper.map(reclamation, ReclamationDto.class);

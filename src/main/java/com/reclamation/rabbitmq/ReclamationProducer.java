@@ -1,4 +1,4 @@
-package com.reclamation.services;
+package com.reclamation.rabbitmq;
 
 import org.springframework.stereotype.Service;
 import org.springframework.amqp.core.AmqpTemplate;

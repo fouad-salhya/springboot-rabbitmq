@@ -2,6 +2,7 @@ package com.reclamation.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class ReclamationController {
 		    consumes= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 
 		    produces= {MediaType.APPLICATION_JSON_VALUE}
 			)
-	public ResponseEntity<ReclamationResponse> addReclamation(@RequestBody ReclamationRequest reclamationRequest ) {
+	public ResponseEntity<ReclamationResponse> addReclamation(@RequestBody ReclamationRequest reclamationRequest ) throws InterruptedException, ExecutionException {
 		
 		ModelMapper modelMapper = new ModelMapper();
 		

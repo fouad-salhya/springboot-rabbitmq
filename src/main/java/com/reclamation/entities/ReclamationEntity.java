@@ -23,11 +23,10 @@ public class ReclamationEntity implements Serializable {
 
 	@Column
 	private String reclamationId;
-/*
-	@Column(name = "user_id", nullable = false)
-	private String userId;
-	*/
 
+	@Column
+	private String userId;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private TypeReclamation typeReclamation;
@@ -80,4 +79,13 @@ public class ReclamationEntity implements Serializable {
 		this.status = status;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	
 }

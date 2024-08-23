@@ -9,6 +9,7 @@ public class ReclamationDto {
 	private TypeReclamation typeReclamation;
 	private String description;
 	private ReclamationStatus status;
+
 	
 
 	public String getReclamationId() {
@@ -35,6 +36,7 @@ public class ReclamationDto {
 	public void setStatus(ReclamationStatus status) {
 		this.status = status;
 	}
+	
 	
 
 
