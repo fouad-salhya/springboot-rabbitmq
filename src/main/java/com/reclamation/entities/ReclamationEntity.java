@@ -37,6 +37,18 @@ public class ReclamationEntity implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private ReclamationStatus status;
+	
+	@Column(length = 6)
+	private String numero;
+	
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
 	public Long getId() {
 		return id;

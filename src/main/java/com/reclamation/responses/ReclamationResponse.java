@@ -13,9 +13,14 @@ public class ReclamationResponse {
 	
 	private ReclamationStatus status;
 	
-	private String userId;
+	private String numero;
 
-	
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 	public String getReclamationId() {
 		return reclamationId;
 	}
@@ -40,12 +45,7 @@ public class ReclamationResponse {
 	public void setStatus(ReclamationStatus status) {
 		this.status = status;
 	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+	
 	
 	
 }

@@ -22,5 +22,11 @@ public class Utils {
 		}
 		return new String(returnValue);
 	}
+	
+	 public String generateRandomNumero() {
+	        Random random = new Random();
+	        int randomNum = 100000 + random.nextInt(900000);  
+	        return String.valueOf(randomNum);
+	    }
 
 }
