@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.reclamation.dtos.ReclamationDto;
+import com.reclamation.dtos.UserDetails;
 import com.reclamation.entities.ReclamationEntity;
 import com.reclamation.entities.ReclamationStatus;
 import com.reclamation.rabbitmq.ReclamationProducer;
@@ -39,13 +40,15 @@ public class ReclamationService {
 		
 		ModelMapper modelMapper = new ModelMapper();
 		
+        UserDetails userDetails = userReceiver.getUserDetails();
+		
 		ReclamationEntity reclamationEntity = modelMapper.map(reclamationDto, ReclamationEntity.class);
 		
 		reclamationEntity.setReclamationId(utils.generateStringId(32));
 		
 		reclamationEntity.setStatus(ReclamationStatus.PENDING);	
 		
-		String userId = userReceiver.getUserId();
+		String userId = userDetails.getUserId();
 		
         reclamationEntity.setUserId(userId);
         
